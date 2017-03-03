@@ -1,0 +1,55 @@
+<h2>Classe Creator</h2>
+
+<h3><span class="glyphicon glyphicon-tasks"></span>&nbsp;Attributs de la classe</h3>
+<label> Point total : </label><button class="btn">{{ hero.totalPoint }}</button><br/>
+
+
+<label for="inputName">Nom de la classe :</label><br/>
+<input type="text" [(ngModel)]="hero.name" id="inputName" class="form-control">
+<br/><br/>
+<label>Point d'attaque :</label><br/>
+<div class="btn-group btn-group-justified" role="group">
+  <div class="btn-group" role="group">
+    <button type="button" (click)="minusAttaque()" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-flash"></span>{{ hero.attaquePoint }}</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" (click)="plusAttaque()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+  </div>
+</div><br>
+
+<label>Point de défense :</label><br/>
+
+<div class="btn-group btn-group-justified" role="group">
+  <div class="btn-group" role="group">
+    <button type="button" (click)="minusDefense()" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default">
+      {{ hero.defensePoint }}</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" (click)="plusDefense()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+  </div>
+</div><br>
+
+
+<label>Mouvement : </label><br>
+<div class="btn-group btn-group-justified" role="group">
+  <div class="btn-group" role="group">
+    <button type="button" (click)="minusMove()" class="btn btn-default"><span class="glyphicon glyphicon-minus"></span></button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-default">
+      {{ hero.movePoint }}</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button type="button" (click)="plusMove()" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></button>
+  </div>
+</div><br>
+
+
+<button (click)="addHeroClass()" class="btn btn-success">Enregistrer</button>

@@ -1,0 +1,9 @@
+<div class="board">
+  <div class="row" data-row-id="" *ngFor="let row of board.matrice">
+
+      <board-case *ngFor="let case of row" [thisCase]="case"
+                  (showUnitMoves)="showUnitMoves($event)"
+                  [class.selected]="isSelected" >
+      </board-case>
+  </div>
+</div>

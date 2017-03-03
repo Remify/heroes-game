@@ -1,0 +1,7 @@
+<board-hero *ngIf="thisCase.unit"
+            [hero]="thisCase.unit"
+            (click)="clickCase(thisCase)"
+            id="{{ thisCase.unit.name }}"
+            [class.selected]="isCaseSelected">
+
+</board-hero>
