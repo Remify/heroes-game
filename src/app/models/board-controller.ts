@@ -27,7 +27,10 @@ export class BoardController {
     this.heroes.next(heroes)
   }
 
-  setHeroeOn(hero: HeroClass, aCase: Case) {
+  setHeroOn(hero: HeroClass, aCase: Case) {
+    console.log('setHeroOn ctrl')
+    console.log(hero, aCase)
+    // TODO moveg serve
     const board = this.board.getValue()
     board.setHeroOn(hero, aCase)
     this.board.next(board);

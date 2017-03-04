@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter, HostBinding} from '@angular/core';
 import {Case} from "../models/case";
 import {HeroClass} from "../models/hero-class";
 import {CaseComponent} from "../case/case.component";
@@ -11,7 +11,8 @@ import {CaseComponent} from "../case/case.component";
 export class BoardHeroComponent implements OnInit {
   @Input() hero :HeroClass;
   @Output() heroSelected = new EventEmitter();
-  private isSelectedHero :boolean;
+
+  @HostBinding('class.mouvable') isSelectedHero: boolean = false;
 
   constructor() {
 
@@ -22,7 +23,6 @@ export class BoardHeroComponent implements OnInit {
   }
 
   changeIsSelectedHero(value : boolean) {
-    console.log('hero')
     this.isSelectedHero = value;
   }
 

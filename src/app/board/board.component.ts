@@ -6,6 +6,7 @@ import {HeroClass} from "../models/hero-class";
 import {BoardController} from "../models/board-controller";
 import {CaseComponent} from "../case/case.component";
 import {HeroesComponent} from "../heroes/heroes.component";
+import {BoardHeroComponent} from "../board-hero/board-hero.component";
 
 @Component({
   selector: 'app-board',
@@ -16,10 +17,11 @@ import {HeroesComponent} from "../heroes/heroes.component";
 export class BoardComponent implements OnInit {
   @Input() heroes: HeroClass[];
   @ViewChildren(CaseComponent) cases: QueryList<CaseComponent>;
-  @ViewChildren(HeroesComponent) heroComponents: QueryList<HeroesComponent>;
-
+  @ViewChildren(BoardHeroComponent) heroComponents: QueryList<BoardHeroComponent>;
+  currentHeroSelected :BoardHeroComponent;
   board: Board;
   boardCtrl: BoardController;
+
 
   constructor(private heroesService: HeroClassService) {
 
@@ -27,11 +29,12 @@ export class BoardComponent implements OnInit {
 
     this.boardCtrl.board.subscribe(
       (newBoard) => this.board = newBoard
-    )
+    );
 
     this.heroesService.heroes.subscribe(
       (list) => this.displayHeroes(list)
-    )
+    );
+
 
   }
 
@@ -42,6 +45,11 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
   }
 
+  changeCurrentHeroSelected(heroComponent: BoardHeroComponent) {
+    console.log('change current hero');
+    this.currentHeroSelected = heroComponent;
+    console.log()
+  }
 
   displayHeroes(heroes: HeroClass[]) {
     for (let i = 0; i < heroes.length; i++) {
@@ -49,24 +57,30 @@ export class BoardComponent implements OnInit {
 
       const x = Math.floor(Math.random() * 10);
       const y = Math.floor(Math.random() * 10);
-      this.boardCtrl.setHeroeOn(hero, this.boardCtrl.getCase(x, y));
+      this.boardCtrl.setHeroOn(hero, this.boardCtrl.getCase(x, y));
     }
   }
 
-  consoleCase(value: Case) {
-    let aHero: HeroClass = new HeroClass(10);
-    this.boardCtrl.setHeroeOn(aHero, value);
+
+  moveHeroTo($event : CaseComponent) {
+    console.log('moveHeroTo')
+    this.boardCtrl.setHeroOn(this.currentHeroSelected.hero, $event.thisCase);
+    //this.cases.toArray()[this.cases.toArray().indexOf($caseComponent)].heroComponent = this.currentHeroSelected
+  }
+
+  isCaseComponent(aCase :CaseComponent) {
+
   }
 
   showUnitMoves(event: Case) {
-
+    console.log('showUnitMoves')
     let hero = event.unit;
 
     let mouvableCases: Case[] = [];
 
     this.board.getAllCase().forEach(function (anotherCase) {
 
-      if (anotherCase.positionTo(event.x, event.y) <= hero.movePoint) {
+      if (anotherCase.positionTo(event.x, event.y) <= hero.movePoint && anotherCase.positionTo(event.x, event.y) != 0) {
         mouvableCases.push(anotherCase);
       }
 
@@ -79,6 +93,7 @@ export class BoardComponent implements OnInit {
 
     selected.forEach(function (element) {
       //element.heroComponent.selectHeroClass(true);
+
       element.changeIsCaseSelected(true);
     })
 

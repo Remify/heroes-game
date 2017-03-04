@@ -15,7 +15,7 @@ board-case {
 }
 
 
-.selected {
+.mouvable {
   border:1px solid red;
 }
 

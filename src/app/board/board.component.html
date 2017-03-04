@@ -2,8 +2,9 @@
   <div class="row" data-row-id="" *ngFor="let row of board.matrice">
 
       <board-case *ngFor="let case of row" [thisCase]="case"
+                  (moveHero)="moveHeroTo($event)"
                   (showUnitMoves)="showUnitMoves($event)"
-                  [class.selected]="isSelected" >
+                  (selectedHero)="changeCurrentHeroSelected($heroComponent)" >
       </board-case>
   </div>
 </div>
