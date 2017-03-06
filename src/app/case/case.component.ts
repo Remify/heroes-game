@@ -14,9 +14,10 @@ export class CaseComponent implements OnInit {
   @Output() showUnitMoves :EventEmitter<Case> = new EventEmitter<Case>();
   @Output() selectedHero :EventEmitter<BoardHeroComponent> = new EventEmitter<BoardHeroComponent>();
   @Output() moveHero :EventEmitter<CaseComponent> = new EventEmitter<CaseComponent>();
+  @Output() attackHeroOn :EventEmitter<CaseComponent> = new EventEmitter<CaseComponent>();
   @ViewChild(BoardHeroComponent) heroComponent :BoardHeroComponent;
   @HostBinding('class.mouvable') isCaseSelected: boolean = false;
-
+  @HostBinding('class.attackable') isAttackable : boolean = false;
   constructor() {
   }
 
@@ -30,11 +31,18 @@ export class CaseComponent implements OnInit {
     this.showUnitMoves.emit(this.thisCase);
   }
 
+  changeIsCaseAttackable(value :boolean) {
+    this.isAttackable = value;
+  }
+
   @HostListener('click') actionCase() {
 
     console.log('click on case')
+    if(this.isAttackable) {
+        this.attackHeroOn.emit(this)
+    }
 
-    if(this.isCaseSelected) {
+    if(this.isCaseSelected && ! this.isAttackable) {
       this.moveHero.emit(this);
     }
 

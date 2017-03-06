@@ -1,7 +1,7 @@
 import {HeroClass} from "./hero-class";
 export class Case {
-  x :number;
-  y :number;
+  x: number;
+  y: number;
   unit: HeroClass;
 
   constructor(x, y) {
@@ -13,16 +13,20 @@ export class Case {
     return this.x + "/" + this.y
   }
 
-  setUnit(hero : HeroClass) {
+  setUnit(hero: HeroClass) {
     this.unit = hero
   }
 
-  isHeroIn(id :string):boolean {
-    if(this.unit) {
+  isHeroIn(id: string): boolean {
+    if (this.unit) {
       return this.unit.$key == id
     } else {
       return false
     }
+  }
+
+  unsetHero() {
+    delete this.unit
   }
 
   positionTo(x, y) {

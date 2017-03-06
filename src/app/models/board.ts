@@ -2,8 +2,8 @@ import {Case} from './case'
 import {HeroClass} from "./hero-class";
 
 export class Board {
-  cols : number;
-  rows : number
+  cols: number;
+  rows: number
   matrice: Case[][];
 
   constructor(cols: number, rows: number) {
@@ -25,23 +25,32 @@ export class Board {
     return this.matrice[x][y];
   }
 
-  setCase(aCase : Case) {
+  setCase(aCase: Case) {
     const x = aCase.x;
     const y = aCase.y;
     this.matrice[x][y] = aCase;
   }
 
-  setHeroOn(hero :HeroClass, aCase :Case) {
-      aCase.setUnit(hero);
-      this.setCase(aCase);
+  setHeroOn(hero: HeroClass, aCase: Case) {
+    aCase.setUnit(hero);
+    this.setCase(aCase);
   }
 
-  getAllCase() :Case[] {
-    let cases :Case[] = new Array();
+  removeHero(hero: HeroClass) {
+    let caseWithHero = this.getAllCase().find(function (aCase) {
+      return aCase.isHeroIn(hero.$key)
+    });
 
-    for(let i = 0; i < this.rows; i++) {
-      for(let j = 0; j < this.cols; j++) {
-          cases.push(this.matrice[i][j])
+    caseWithHero.unsetHero()
+    this.setCase(caseWithHero)
+  }
+
+  getAllCase(): Case[] {
+    let cases: Case[] = new Array();
+
+    for (let i = 0; i < this.rows; i++) {
+      for (let j = 0; j < this.cols; j++) {
+        cases.push(this.matrice[i][j])
       }
     }
     return cases;

@@ -11,8 +11,7 @@ import {CaseComponent} from "../case/case.component";
 export class BoardHeroComponent implements OnInit {
   @Input() hero :HeroClass;
   @Output() heroSelected = new EventEmitter();
-
-  @HostBinding('class.mouvable') isSelectedHero: boolean = false;
+  @HostBinding('class.selected') isSelectedHero: boolean = false;
 
   constructor() {
 

@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
   @Input() heroes: HeroClass[];
   @ViewChildren(CaseComponent) cases: QueryList<CaseComponent>;
   @ViewChildren(BoardHeroComponent) heroComponents: QueryList<BoardHeroComponent>;
-  currentHeroSelected :BoardHeroComponent;
+  currentHeroSelected: BoardHeroComponent;
   board: Board;
   boardCtrl: BoardController;
 
@@ -45,10 +45,9 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
   }
 
-  changeCurrentHeroSelected(heroComponent: BoardHeroComponent) {
-    console.log('change current hero');
-    this.currentHeroSelected = heroComponent;
-    console.log()
+  changeCurrentHeroSelected($event: BoardHeroComponent) {
+    this.currentHeroSelected = $event;
+    this.currentHeroSelected.changeIsSelectedHero(true)
   }
 
   displayHeroes(heroes: HeroClass[]) {
@@ -62,40 +61,73 @@ export class BoardComponent implements OnInit {
   }
 
 
-  moveHeroTo($event : CaseComponent) {
-    console.log('moveHeroTo')
-    this.boardCtrl.setHeroOn(this.currentHeroSelected.hero, $event.thisCase);
-    //this.cases.toArray()[this.cases.toArray().indexOf($caseComponent)].heroComponent = this.currentHeroSelected
+  moveHeroTo($event: CaseComponent) {
+    if(this.boardCtrl.tour.hasMouved) {
+
+    } else {
+      const heroToMove = this.currentHeroSelected.hero;
+      this.boardCtrl.removeHeroFromBoard(heroToMove);
+      this.boardCtrl.setHeroOn(heroToMove, $event.thisCase);
+      //this.boardCtrl.changeHasMoveTour(true);
+      this.unSelectAll();
+      this.showAttackPossibilities($event);
+    }
   }
 
-  isCaseComponent(aCase :CaseComponent) {
+  unSelectAll() {
+    this.cases.map(function (aCase) {
+      aCase.changeIsCaseSelected(false)
+    })
+  }
 
+  showAttackPossibilities(caseComponent :CaseComponent) {
+
+    console.log('show possible attacks from', caseComponent.thisCase)
+
+    let attackables = this.cases.filter(function(thatCaseComponent) {
+      return ((thatCaseComponent.thisCase.positionTo(caseComponent.thisCase.x, caseComponent.thisCase.y) == 1) && (typeof thatCaseComponent.thisCase.unit !== 'undefined'))
+    })
+
+    attackables.map(function (thatCaseComponent) {
+        thatCaseComponent.changeIsCaseAttackable(true)
+    })
+
+    console.log(attackables)
+  }
+
+  attackHero(event: CaseComponent) {
+
+    this.boardCtrl.fight(this.currentHeroSelected.hero, event.thisCase.unit)
   }
 
   showUnitMoves(event: Case) {
-    console.log('showUnitMoves')
-    let hero = event.unit;
+    // Si le joueur à déjà joué, on ne montre pas les mouvements possibles
+    if(! this.boardCtrl.tour.hasMouved) {
+      let hero = event.unit;
 
-    let mouvableCases: Case[] = [];
+      let mouvableCases: Case[] = [];
 
-    this.board.getAllCase().forEach(function (anotherCase) {
+      this.board.getAllCase().forEach(function (anotherCase) {
 
-      if (anotherCase.positionTo(event.x, event.y) <= hero.movePoint && anotherCase.positionTo(event.x, event.y) != 0) {
-        mouvableCases.push(anotherCase);
-      }
+        if (anotherCase.positionTo(event.x, event.y) <= hero.movePoint && anotherCase.positionTo(event.x, event.y) != 0) {
+          mouvableCases.push(anotherCase);
+        }
 
-    })
+      })
 
-    var selected = this.cases.filter(function (compCase: CaseComponent) {
-      return mouvableCases.indexOf(compCase.thisCase) >= 0
-    });
+      var selected = this.cases.filter(function (compCase: CaseComponent) {
+        return mouvableCases.indexOf(compCase.thisCase) >= 0
+      });
 
 
-    selected.forEach(function (element) {
-      //element.heroComponent.selectHeroClass(true);
+      selected.forEach(function (element) {
+        //element.heroComponent.selectHeroClass(true);
 
-      element.changeIsCaseSelected(true);
-    })
+        element.changeIsCaseSelected(true);
+      })
+
+    }
+
 
   }
 
