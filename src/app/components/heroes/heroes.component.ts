@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HeroClassService} from "../services/hero-class.service";
-import {HeroClass} from "../models/hero-class";
+import {HeroClassService} from "../../services/hero-class.service";
+import {HeroClass} from "../../models/hero-class";
 import {AngularFire, AuthProviders, AuthMethods} from 'angularfire2';
 
 @Component({
@@ -10,33 +10,27 @@ import {AngularFire, AuthProviders, AuthMethods} from 'angularfire2';
 })
 export class HeroesComponent implements OnInit {
 
-  currentHeroClass : HeroClass;
+  // Héro à ajouter à l'équipe
+  selectedHero : HeroClass;
+  search :string = "";
+  // Liste des héros récupérer sur les services
   heroes : HeroClass[];
   constructor(private heroClassService:HeroClassService, af:AngularFire) {
-    this.initHeroCreator();
-
+    this.heroes = []
     this.heroClassService.heroes.subscribe(
-      (list) => this.heroes= list
+      (list) => this.heroes = list.filter( hero => typeof hero.playerRef == 'undefined')
     )
-
-    af.auth.login({
-      provider: AuthProviders.Anonymous,
-      method: AuthMethods.Anonymous,
-    });
-
   }
 
-
-  initHeroCreator() {
-    this.currentHeroClass = new HeroClass(10);
-  }
+  // Ajoute le héro courant
   selectHeroClass(hero) {
-    this.currentHeroClass = hero;
+    this.selectedHero = hero;
   }
 
   ngOnInit() {
 
   }
+
 
 
 }

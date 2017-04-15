@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, HostListener} from '@angular/core';
+import {PlayerService} from "./services/player.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,24 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'Hero creator';
 
-  constructor() {
+  constructor(private playerService :PlayerService) {
 
   }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // beforeunloadHandler(event) {
+  //   this.playerService.disconnect()
+  //
+  //   var e = e || window.event;
+  //
+  //   //IE & Firefox
+  //   if (e) {
+  //     e.returnValue = 'Are you sure?';
+  //   }
+  //
+  //   // For Safari
+  //   return 'Are you sure?';
+  //
+  // }
+
 }

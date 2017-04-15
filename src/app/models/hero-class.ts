@@ -1,3 +1,4 @@
+import {Player} from "./player";
 export class HeroClass {
   $key?: string;
   name: string;
@@ -7,16 +8,16 @@ export class HeroClass {
   movePoint: number;
   cost: number;
   hp: number;
+  playerRef? : string;
 
   constructor(totalPoint: number) {
-    this.$key;
     this.name = "";
     this.totalPoint = totalPoint;
     this.attaquePoint = 0;
     this.defensePoint = 0;
     this.movePoint = 0;
     this.cost = 0;
-    this.hp = 0;
+    this.hp = 10;
   }
 
   Attaque() :number{

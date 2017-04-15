@@ -5,7 +5,7 @@ import {Case} from "../models/case";
 import {HeroClass} from "../models/hero-class";
 import {BoardController} from "../models/board-controller";
 import {CaseComponent} from "../case/case.component";
-import {HeroesComponent} from "../heroes/heroes.component";
+import {HeroesComponent} from "../components/heroes/heroes.component";
 import {BoardHeroComponent} from "../board-hero/board-hero.component";
 
 @Component({
@@ -96,7 +96,7 @@ export class BoardComponent implements OnInit {
   }
 
   attackHero(event: CaseComponent) {
-
+    // Todo : attacker as HeroClass with attack method
     this.boardCtrl.fight(this.currentHeroSelected.hero, event.thisCase.unit)
   }
 

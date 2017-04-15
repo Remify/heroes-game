@@ -19,7 +19,12 @@ export class BoardController {
     this.tour = new Tour();
 
     this.heroesService.heroes.subscribe(
-      (heroList) => this.heroes = heroList
+      heroesList => this.heroes = heroesList.map(function (hero) {
+        let heroObj = Object.assign(new HeroClass(10), hero);
+        heroObj.$key = hero.$key
+
+        return heroObj
+      })
     )
   }
 
@@ -44,12 +49,16 @@ export class BoardController {
   }
 
   fight(attackHero: HeroClass, defenseHero :HeroClass) {
+
+    console.log('fight', this.heroes)
     const heroesList = this.heroes ;
 
     heroesList.map(function (hero) {
       if(hero.$key == defenseHero.$key) {
         // TODO attaque bug
-        defenseHero.Defend(attackHero.Attaque())
+        console.log(hero)
+        hero.Defend(attackHero.Attaque())
+        console.log(hero)
       }
     })
 
