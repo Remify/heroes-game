@@ -4,6 +4,7 @@ import {HeroClassService} from "../../services/hero-class.service";
 import {moveIn} from "../../router.animation";
 import {PlayerService} from "../../services/player.service";
 import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-hero-class-creator',
@@ -46,6 +47,8 @@ export class HeroClassCreatorComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
   }
 
 
@@ -85,26 +88,25 @@ export class HeroClassCreatorComponent implements OnInit {
    * Enregistre le Héro dans le service. Ici nous cherchons à récupérer l'ID du héro dans la base
    * Une fois l'enregistré, l'utilisateur et redirigé vers la création de son équipe
    */
-  addHeroClass(): void {
-    console.log('click add')
-    if (this.hero.name.length > 0) {
+  addHero():boolean {
 
-      // Capitalize la premiere lettre du Héro
-       let name = this.hero.name;
-      name.charAt(0).toUpperCase() + name.slice(1);
-      this.hero.name = name;
 
-      this.playerService.currentPlayer.subscribe(
-        player => this.hero.playerRef = player.key
-      )
+      let name = this.hero.name;
 
-      this.heroClassService.createHero(this.hero).then(
-        (success) => {
-          this.router.navigate(['heroes'])
-        }
-      )
+      if(name.length > 0) {
 
-    }
+
+        this.heroClassService.createHero(this.hero).then(
+          (success) => {
+            console.log('in', success)
+            this.playerService.addHeroKeyToPlayer(success.key)
+            this.router.navigate(['heroes'])
+          }
+        )
+
+      }
+
+    return false;
   }
 
   /**

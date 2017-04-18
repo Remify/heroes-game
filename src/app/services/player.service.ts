@@ -4,7 +4,6 @@ import {Player} from "../models/player";
 
 @Injectable()
 export class PlayerService {
-
   currentPlayer : FirebaseObjectObservable<Player>;
   players: FirebaseListObservable<any>;
 
@@ -13,10 +12,7 @@ export class PlayerService {
     this.currentPlayer = new FirebaseObjectObservable();
   }
 
-  // Todo : ref heroes
-  addHero() {
 
-  }
   addPlayer(player :Player) {
     const promise = this.players.push(player)
     promise.then(
@@ -28,6 +24,19 @@ export class PlayerService {
     );
 
     return promise
+  }
+
+  addHeroKeyToPlayer(key :string) {
+    console.log('addHeroKey', key);
+    console.log('current player ref', this.currentPlayer.$ref);
+
+    this.firebase.database.object('players/' + this.currentPlayer.$ref.key).take(1).subscribe(
+      player => {
+        console.log(player);
+        //this.currentPlayer.update(player.addHeroKey(key));
+      }
+    )
+
   }
 
   disconnect() {
