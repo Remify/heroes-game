@@ -21,4 +21,19 @@ export class Player {
     return this
   }
 
+  unsetHeroKey(key :string) {
+    this.heroesKeys = this.heroesKeys.filter(element => element !== key);
+  }
+
+  mapFromFirebase(obj :any):Player {
+    this.key = obj.$key;
+    this.pseudo = obj.pseudo || '';
+    this.isPlaying = obj.isPlaying || false;
+    this.isOnline = obj.isOnline || false;
+    this.heroesKeys = obj.heroesKeys || [];
+    this.heroes = obj.key || []; // TODO : Ne fonctionnera pas
+
+    return this;
+  }
+
 }

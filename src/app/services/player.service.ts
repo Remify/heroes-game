@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import {FirebaseListObservable, AngularFire, FirebaseObjectObservable} from "angularfire2";
 import {Player} from "../models/player";
 
+/**
+ * Gère l'accès aux données du joueur courant et de la liste des joueurs
+ */
 @Injectable()
 export class PlayerService {
   currentPlayer : FirebaseObjectObservable<Player>;
@@ -12,28 +15,58 @@ export class PlayerService {
     this.currentPlayer = new FirebaseObjectObservable();
   }
 
-
+  /**
+   * Ajoute un joueur courant
+   * @param player
+   * @returns {firebase.database.ThenableReference}
+   */
   addPlayer(player :Player) {
     const promise = this.players.push(player)
     promise.then(
       (item) =>
       {
         player.key = item.key;
-        this.currentPlayer = this.firebase.database.object(player.key)
+        this.currentPlayer = this.firebase.database.object('players/' + player.key);
+
+
+        this.currentPlayer.subscribe(
+          value => console.log(value),
+          err => console.log(err)
+        );
+
       }
     );
 
     return promise
   }
 
+  /**
+   * Ajoute au joueur courant un hero
+   * @param key
+   */
   addHeroKeyToPlayer(key :string) {
-    console.log('addHeroKey', key);
-    console.log('current player ref', this.currentPlayer.$ref);
 
     this.firebase.database.object('players/' + this.currentPlayer.$ref.key).take(1).subscribe(
       player => {
-        console.log(player);
-        //this.currentPlayer.update(player.addHeroKey(key));
+        // Mappage de l'object firebase en Player
+        let p = new Player('').mapFromFirebase(player);
+        // Ajout du nouvel héro
+        p.addHeroKey(key);
+        this.currentPlayer.update(p);
+      }
+    )
+
+  }
+
+  unsetHeroToCurrentPlayer(key :string) {
+
+    this.firebase.database.object('players/' + this.currentPlayer.$ref.key).take(1).subscribe(
+      player => {
+        // Mappage de l'object firebase en Player
+        let p = new Player('').mapFromFirebase(player);
+        // suppression d'un nouvel héro
+        p.unsetHeroKey(key);
+        this.currentPlayer.update(p);
       }
     )
 

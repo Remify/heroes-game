@@ -24,6 +24,7 @@ import { LobbyComponent } from './components/lobby/lobby.component';
 import { CapitalizeFirstPipe } from './capitalize-first.pipe';
 import { TeamComponent } from './components/team/team.component';
 import { DataFilterPipe } from './data-filter.pipe';
+import {DndModule} from "ng2-dnd";
 
 // Router
 RouterModule.forRoot([
@@ -55,6 +56,7 @@ RouterModule.forRoot([
     ReactiveFormsModule,
     DataTableModule,
     RouterModule.forRoot(routes),
+    DndModule.forRoot(),
     AlertModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],

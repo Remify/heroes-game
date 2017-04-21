@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HeroClass} from "../models/hero-class";
-import {AngularFire, FirebaseListObservable} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
 
 @Injectable()
 export class HeroClassService {
@@ -23,5 +23,10 @@ export class HeroClassService {
 
   updateHero(hero: HeroClass, changes: any): firebase.Promise<any> {
     return this.heroes.update(hero.$key, hero);
+  }
+
+  getHero(key :string) :FirebaseObjectObservable<any> {
+    console.log('getHero');
+    return this.firebase.database.object('heroes/' + key);
   }
 }

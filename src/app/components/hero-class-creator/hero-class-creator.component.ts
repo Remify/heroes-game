@@ -33,7 +33,6 @@ export class HeroClassCreatorComponent implements OnInit {
               private router: Router) {
 
     if (!this.playerService.currentPlayer) {
-      console.log('redirect')
       this.router.navigate(['login']);
     }
 
@@ -98,7 +97,6 @@ export class HeroClassCreatorComponent implements OnInit {
 
         this.heroClassService.createHero(this.hero).then(
           (success) => {
-            console.log('in', success)
             this.playerService.addHeroKeyToPlayer(success.key)
             this.router.navigate(['heroes'])
           }
