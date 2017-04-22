@@ -13,6 +13,7 @@ export class HeroClassService {
   }
 
   createHero(hero: HeroClass): firebase.Promise<any> {
+    console.log('hero in CreatHero', hero);
     const promise = this.heroes.push(hero);
     return promise
   }

@@ -8,6 +8,10 @@ import {HeroClassService} from "../../services/hero-class.service";
   templateUrl: './team.component.html',
   styleUrls: ['./team.component.css']
 })
+
+/**
+ * Affiche la liste des héro du joueur courant
+ */
 export class TeamComponent implements OnInit {
   public heroes: HeroClass[];
   public deletedHeroes: HeroClass[];

@@ -27,6 +27,7 @@ import { TeamComponent } from './components/team/team.component';
 import { DataFilterPipe } from './data-filter.pipe';
 import {DndModule} from "ng2-dnd";
 import {UploadComponent} from "./components/upload/upload.component";
+import { HeroComponent } from './components/hero/hero.component';
 
 // Router
 RouterModule.forRoot([
@@ -51,6 +52,7 @@ RouterModule.forRoot([
     CapitalizeFirstPipe,
     TeamComponent,
     DataFilterPipe,
+    HeroComponent,
   ],
   imports: [
     BrowserModule,

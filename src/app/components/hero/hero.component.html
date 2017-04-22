@@ -1,0 +1,28 @@
+<div id="hero-panel" *ngIf="hero" >
+  <div class="panel panel-default " >
+    <div class="panel-heading">
+      {{ hero.name }}
+      <button class="edit-btn btn" type="button" (click)="editHero(hero)"><span class="glyphicon glyphicon-pencil"></span></button>
+    </div>
+    <div class="panel-body">
+
+      <div class="row">
+        <div class="col stats">
+
+            <div><span class="glyphicon glyphicon-flash"></span> Attaque : {{ hero.attaquePoint }}</div>
+            <div><span class="glyphicon glyphicon-remove-sign"></span> Défense :{{ hero.defensePoint }}</div>
+            <div><span class="glyphicon glyphicon-move"></span> Mouvement :  {{ hero.movePoint }}</div>
+            <div><span class="glyphicon glyphicon-heart"></span> Hp : {{ hero.hp }}</div>
+
+        </div>
+        <div class="col">
+          <img [src]="hero.imageLink">
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      Utilisé par :
+      <span *ngFor="let name of usedBy" class="label label-info">{{ name }}</span>
+    </div>
+  </div>
+</div>

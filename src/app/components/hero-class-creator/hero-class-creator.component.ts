@@ -3,7 +3,7 @@ import {HeroClass} from '../../models/hero-class'
 import {HeroClassService} from "../../services/hero-class.service";
 import {moveIn} from "../../router.animation";
 import {PlayerService} from "../../services/player.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -21,7 +21,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
  */
 export class HeroClassCreatorComponent implements OnInit {
 
-  // héro créer
   hero: HeroClass;
 
   /**
@@ -32,11 +31,13 @@ export class HeroClassCreatorComponent implements OnInit {
    */
   constructor(private heroClassService: HeroClassService,
               private playerService: PlayerService,
+              private route: ActivatedRoute,
               private router: Router) {
 
     if (!this.playerService.currentPlayer) {
       this.router.navigate(['login']);
     }
+
 
     // 10 nombre de points pour le héro
     this.hero = new HeroClass(40);
@@ -46,6 +47,17 @@ export class HeroClassCreatorComponent implements OnInit {
     this.plusDefense();
     this.plusMove();
     this.plusHp();
+
+
+    this.route.params.subscribe(
+      params => {
+        if(params['id']) {
+          let key = params['id'];
+          this.heroClassService.getHero(key).subscribe(
+            hero => this.hero = hero
+          );
+        }
+      });
   }
 
   ngOnInit() {
@@ -98,9 +110,7 @@ export class HeroClassCreatorComponent implements OnInit {
    * Enregistre le Héro dans le service. Ici nous cherchons à récupérer l'ID du héro dans la base
    * Une fois l'enregistré, l'utilisateur et redirigé vers la création de son équipe
    */
-  addHero():boolean {
-
-
+  addHero(): boolean {
       let name = this.hero.name;
 
       if(name.length > 0) {
@@ -108,7 +118,7 @@ export class HeroClassCreatorComponent implements OnInit {
 
         this.heroClassService.createHero(this.hero).then(
           (success) => {
-            this.playerService.addHeroKeyToPlayer(success.key)
+            this.playerService.addHeroKeyToPlayer(success.key);
             this.router.navigate(['heroes'])
           }
         )
@@ -119,13 +129,11 @@ export class HeroClassCreatorComponent implements OnInit {
   }
 
   /**
-   * Event Binding from uploadComponent
+   * Event Binding de uploadComponent
    * @param event
    */
   newUrl(obj) {
-
-    this.hero.imageLink = obj.link;
-    console.log('event', obj);
+    this.hero.imageLink = obj.url;
   }
 
   /**

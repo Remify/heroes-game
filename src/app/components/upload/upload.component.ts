@@ -22,10 +22,10 @@ interface Image {
   <div class="row">
     <div class="col-md-6">
     
-      <div [hidden]="link">
+      <form ngNoForm [hidden]="link">
           <input  class="form-control" id="file" name="file" type="file" required>
           <button type="button" class="btn btn-default" (click)="upload()">Upload</button>
-      </div>
+      </form>
       
         <div *ngIf="link">
            <div class="alert alert-success">
@@ -55,7 +55,7 @@ export class UploadComponent {
    */
   folder: string = 'images';
 
-  link: string;
+  @Input() link: string;
   @Output() imageKey: string;
   @Output() newUrl = new EventEmitter();
   fileList: FirebaseListObservable<Image[]>;

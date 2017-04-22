@@ -6,7 +6,7 @@
 
   <form #form="ngForm" (ngSubmit)="addHero()">
     <label for="inputName">Nom du héro :</label><br/>
-    <input type="text" [(ngModel)]="hero.name" required id="inputName"  name="name" class="form-control" pattern="^[A-Z\d][^\n]+" #heroname="ngModel">
+    <input type="text" [(ngModel)]="hero.name" required id="inputName" name="name" class="form-control" pattern="^[A-Z\d][^\n]+" #heroname="ngModel">
     <small [hidden]="heroname.valid" class="text-danger">
       Le nom d'un Héro commence toujours par une majuscule ...
     </small>
@@ -92,14 +92,17 @@
       </div>
     </div>
 
-
-    <image-upload (newUrl)="newUrl($event)"></image-upload>
+    <div>
+      link : {{ hero.imageLink }}
+    </div>
+    <image-upload [link]="hero.imageLink" (newUrl)="newUrl($event)"></image-upload>
 
     <br>
-    <button type="submit" class="btn btn-success">Enregistrer mon Héro</button>
+    <button type="button" (click)="addHero()" class="btn btn-success">Enregistrer mon Héro</button>
 
 
   </form>
+
 
 
 </div>

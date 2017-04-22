@@ -1,3 +1,8 @@
 h1 {
   padding-left:15px;
 }
+
+hero {
+  margin-top: 40px;
+  display: block;
+}
