@@ -1,14 +1,24 @@
-<div class="panel-body" dnd-sortable-container [sortableData]="heroes" [dropZones]="['delete-dropZone']" >
+<div class="panel-body" dnd-sortable-container [sortableData]="heroes" [dropZones]="['delete-dropZone']">
   <ul class="list-group">
 
-    <li *ngFor="let hero of heroes; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="hero">
-      {{hero.name}} | A : {{ hero.attaquePoint }} | D : {{ hero.defensePoint }} | M : {{ hero.movePoint }}
+    <li *ngFor="let hero of heroes; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i"
+        [dragData]="hero">
+      {{hero.name}}
+
+      <span class="flex-center">
+
+       <span class="glyphicon glyphicon-flash">{{ hero.attaquePoint }} </span>
+       <span class="glyphicon glyphicon-remove-sign">{{ hero.defensePoint }}</span>
+       <span class="glyphicon glyphicon-move">{{ hero.movePoint }}</span>
+       <span class="glyphicon glyphicon-heart">{{ hero.hp }} </span>
+
+      </span>
     </li>
   </ul>
 </div>
 
 <div class="panel panel-default drop-zone padding">
-  <div class="panel-body"  dnd-droppable [dropZones]="['delete-dropZone']" (onDropSuccess)="unsetHero($event)">
+  <div class="panel-body" dnd-droppable [dropZones]="['delete-dropZone']" (onDropSuccess)="unsetHero($event)">
     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
   </div>
 </div>

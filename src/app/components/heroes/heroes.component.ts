@@ -21,6 +21,7 @@ export class HeroesComponent implements OnInit {
     this.heroClassService.heroes.subscribe(
       (list) => this.heroes = list
     )
+
   }
 
   // Ajoute le héro courant

@@ -14,6 +14,7 @@ export class TeamComponent implements OnInit {
 
   constructor(private playerService: PlayerService, private heroService: HeroClassService) {
     this.deletedHeroes = [];
+    this.heroes = [];
 
   }
 

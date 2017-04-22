@@ -16,6 +16,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 /**
  * Composant pour la création du héro
+ *
+ * La validation du nom du héro se trouve dans le Html avec une regexp
  */
 export class HeroClassCreatorComponent implements OnInit {
 
@@ -37,12 +39,13 @@ export class HeroClassCreatorComponent implements OnInit {
     }
 
     // 10 nombre de points pour le héro
-    this.hero = new HeroClass(10);
+    this.hero = new HeroClass(40);
 
     // Init des points
     this.plusAttaque();
     this.plusDefense();
     this.plusMove();
+    this.plusHp();
   }
 
   ngOnInit() {
@@ -83,6 +86,14 @@ export class HeroClassCreatorComponent implements OnInit {
     this.changeStat("movePoint", 1);
   }
 
+  minusHp() {
+    this.changeStat("hp", -1);
+  }
+
+  plusHp() {
+    this.changeStat("hp", 1);
+  }
+
   /**
    * Enregistre le Héro dans le service. Ici nous cherchons à récupérer l'ID du héro dans la base
    * Une fois l'enregistré, l'utilisateur et redirigé vers la création de son équipe
@@ -104,7 +115,17 @@ export class HeroClassCreatorComponent implements OnInit {
 
       }
 
-    return false;
+    return false; // retourne faux pour ne pas exectuer le formulaire
+  }
+
+  /**
+   * Event Binding from uploadComponent
+   * @param event
+   */
+  newUrl(obj) {
+
+    this.hero.imageLink = obj.link;
+    console.log('event', obj);
   }
 
   /**

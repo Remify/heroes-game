@@ -23,6 +23,9 @@ export class Player {
 
   unsetHeroKey(key :string) {
     this.heroesKeys = this.heroesKeys.filter(element => element !== key);
+    if(typeof this.heroesKeys == "undefined") {
+      this.heroesKeys = [];
+    }
   }
 
   mapFromFirebase(obj :any):Player {

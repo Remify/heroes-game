@@ -1,45 +1,50 @@
-<h1>Constituez votre équipe</h1>
 <div class="col-md-5">
+  <h2>Constituez votre équipe</h2>
+  <table [mfData]="heroes | dataFilter : search" #mf="mfDataTable" [mfRowsOnPage]="20"
+         (mfSelectedEntities)="setSelectedEntities($event)" class="table table-bordered">
+    <thead>
+    <tr>
+      <th style="width: 55%">
+        <mfDefaultSorter by="name">Nom</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="attaquePoint">Attaque</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="defensePoint">Défense</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="movePoint">Déplacement</mfDefaultSorter>
+      </th>
+      <th style="width: 15%">
+        <mfDefaultSorter by="hp">HP</mfDefaultSorter>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let hero of mf.data; let ndx = index" [class.active]="hero === selectedHero"
+        (click)="selectHeroClass(hero)">
+      <td>{{hero.name }}</td>
+      <td>{{hero.attaquePoint}}</td>
+      <td>{{hero.defensePoint}}</td>
+      <td>{{hero.movePoint }}</td>
+      <td>{{hero.hp }}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+      <td colspan="5">
+        <input #inputsearch class="left" [(ngModel)]="search" placeholder="Chercher un nom"/>
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
+  </table>
 
-    <table [mfData]="heroes | dataFilter : search" #mf="mfDataTable" [mfRowsOnPage]="20" (mfSelectedEntities)="setSelectedEntities($event)" class="table table-bordered">
-      <thead>
-      <tr>
-        <th style="width: 55%">
-          <mfDefaultSorter by="name">Nom</mfDefaultSorter>
-        </th>
-        <th style="width: 15%">
-          <mfDefaultSorter by="attaquePoint">Attaque</mfDefaultSorter>
-        </th>
-        <th style="width: 15%">
-          <mfDefaultSorter by="defensePoint">Défense</mfDefaultSorter>
-        </th>
-        <th style="width: 15%">
-          <mfDefaultSorter by="movePoint">Déplacement</mfDefaultSorter>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let hero of mf.data; let ndx = index" [class.active]="hero === selectedHero" (click)="selectHeroClass(hero)">
-        <td>{{hero.name }}</td>
-        <td>{{hero.attaquePoint}}</td>
-        <td>{{hero.defensePoint}}</td>
-        <td>{{hero.movePoint }}</td>
-      </tr>
-      </tbody>
-      <tfoot>
-      <tr>
-        <td colspan="4">
-          <input #inputsearch class="left" [(ngModel)]="search" placeholder="Chercher un nom" />
-          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
-
-    <button class="btn" [disabled]='!selectedHero' (click)="addHeroToCurrentPlayer()"> Ajouter à l'équipe</button>
+  <button class="btn" [disabled]='!selectedHero' (click)="addHeroToCurrentPlayer()"> Ajouter à l'équipe</button>
 </div>
 <div class="col-md-6">
-  <h1>Votre équipe :</h1>
+  <h2>Votre équipe :</h2>
   <app-team></app-team>
 </div>
 <div class="col-md-3">

@@ -8,7 +8,7 @@ export class HeroClass {
   movePoint: number;
   cost: number;
   hp: number;
-  playerRef? : string;
+  imageLink :string;
 
   constructor(totalPoint: number) {
     this.name = "";
@@ -17,7 +17,8 @@ export class HeroClass {
     this.defensePoint = 0;
     this.movePoint = 0;
     this.cost = 0;
-    this.hp = 10;
+    this.hp = 0;
+    this.imageLink = "";
   }
 
   Attaque() :number{
