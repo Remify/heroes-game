@@ -15,7 +15,7 @@ import {HeroClassService} from "../../services/hero-class.service";
 export class TeamComponent implements OnInit {
   public heroes: HeroClass[];
   public deletedHeroes: HeroClass[];
-
+  public message = "";
   constructor(private playerService: PlayerService, private heroService: HeroClassService) {
     this.deletedHeroes = [];
     this.heroes = [];
@@ -40,7 +40,7 @@ export class TeamComponent implements OnInit {
 
                 // N'ajoute pas le héro si il existe déjà dans la liste
                 if (!this.heroes.find(hero => hero.$key === key)) {
-                  console.log(hero)
+                  this.message = "";
                   this.heroes.push(hero)
                 }
               });
@@ -56,7 +56,12 @@ export class TeamComponent implements OnInit {
 
   unsetHero(event: any) {
     let hero = event.dragData;
-    this.playerService.unsetHeroToCurrentPlayer(hero.$key);
+    if(this.heroes.length > 1 ) {
+      this.playerService.unsetHeroToCurrentPlayer(hero.$key);
+      this.message = "";
+    } else {
+      this.message = "Il te faut au moins 1 Héro dans ton équipe !";
+    }
   }
 
 }

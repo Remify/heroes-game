@@ -16,7 +16,9 @@
     </li>
   </ul>
 </div>
-
+<div class="panel">
+  {{ message }}
+</div>
 <div class="panel panel-default drop-zone padding">
   <div class="panel-body" dnd-droppable [dropZones]="['delete-dropZone']" (onDropSuccess)="unsetHero($event)">
     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

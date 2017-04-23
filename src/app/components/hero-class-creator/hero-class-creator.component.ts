@@ -5,6 +5,7 @@ import {moveIn} from "../../router.animation";
 import {PlayerService} from "../../services/player.service";
 import {Router, ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Image} from "../../models/image";
 
 @Component({
   selector: 'app-hero-class-creator',
@@ -15,7 +16,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 
 /**
- * Composant pour la création du héro
+ * Composant pour la création et l'edition d'un héro
  *
  * La validation du nom du héro se trouve dans le Html avec une regexp
  */
@@ -42,6 +43,14 @@ export class HeroClassCreatorComponent implements OnInit {
     // 10 nombre de points pour le héro
     this.hero = new HeroClass(40);
 
+    // Init de l'image
+    this.hero.image = {
+      path: undefined,
+      filename: '',
+      downloadURL: '',
+      key: undefined
+    }
+
     // Init des points
     this.plusAttaque();
     this.plusDefense();
@@ -61,8 +70,6 @@ export class HeroClassCreatorComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
   }
 
 
@@ -113,8 +120,7 @@ export class HeroClassCreatorComponent implements OnInit {
   addHero(): boolean {
       let name = this.hero.name;
 
-      if(name.length > 0) {
-
+      if(name.length > 0 && this.hero.image.downloadURL.length > 0) {
 
         this.heroClassService.createHero(this.hero).then(
           (success) => {
@@ -128,12 +134,18 @@ export class HeroClassCreatorComponent implements OnInit {
     return false; // retourne faux pour ne pas exectuer le formulaire
   }
 
+  updateHero() {
+    this.heroClassService.updateHero(this.hero).then(
+      success => this.router.navigate(['heroes'])
+    );
+  }
+
   /**
    * Event Binding de uploadComponent
    * @param event
    */
-  newUrl(obj) {
-    this.hero.imageLink = obj.url;
+  newUrl(image :Image) {
+    this.hero.image = image;
   }
 
   /**

@@ -28,6 +28,10 @@ import { DataFilterPipe } from './data-filter.pipe';
 import {DndModule} from "ng2-dnd";
 import {UploadComponent} from "./components/upload/upload.component";
 import { HeroComponent } from './components/hero/hero.component';
+import { ItemsComponent } from './components/items/items.component';
+import { ItemComponent } from './components/item/item.component';
+import {ItemService} from "./services/item.service";
+import {Ng2SliderComponent} from "ng2-slider-component/ng2-slider.component";
 
 // Router
 RouterModule.forRoot([
@@ -45,6 +49,8 @@ RouterModule.forRoot([
     LoginComponent,
     HeroesComponent,
     CaseComponent,
+    ItemsComponent,
+    ItemComponent,
     BoardHeroComponent,
     SignupComponent,
     LobbyComponent,
@@ -53,6 +59,8 @@ RouterModule.forRoot([
     TeamComponent,
     DataFilterPipe,
     HeroComponent,
+    ItemsComponent,
+    ItemComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,7 +74,7 @@ RouterModule.forRoot([
     AlertModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [HeroClassService, PlayerService ],
+  providers: [HeroClassService, PlayerService, ItemService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

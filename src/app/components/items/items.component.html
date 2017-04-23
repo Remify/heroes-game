@@ -1,0 +1,24 @@
+<div class="panel-body" dnd-sortable-container [sortableData]="items">
+  <ul class="list-group">
+
+    <li *ngFor="let item of items; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i"
+        [dragData]="hero">
+      {{item.name}}
+
+      <span class="flex-center">
+
+       <span class="glyphicon glyphicon-flash">{{ item.attaque}} </span>
+       <span class="glyphicon glyphicon-remove-sign">{{ item.defense }}</span>
+       <span class="glyphicon glyphicon-move">{{ item.move }}</span>
+       <span class="glyphicon glyphicon-heart">{{ item.hp }} </span>
+
+      </span>
+    </li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col-md-2">
+    <app-item></app-item>
+  </div>
+</div>

@@ -9,7 +9,6 @@ export class HeroClassService {
 
   constructor(private firebase: AngularFire) {
     this.heroes = firebase.database.list('/heroes', HeroClass);
-
   }
 
   createHero(hero: HeroClass): firebase.Promise<any> {
@@ -22,7 +21,7 @@ export class HeroClassService {
     return this.heroes.remove(hero.$key);
   }
 
-  updateHero(hero: HeroClass, changes: any): firebase.Promise<any> {
+  updateHero(hero: HeroClass): firebase.Promise<any> {
     return this.heroes.update(hero.$key, hero);
   }
 

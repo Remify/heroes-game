@@ -92,13 +92,11 @@
       </div>
     </div>
 
-    <div>
-      link : {{ hero.imageLink }}
-    </div>
-    <image-upload [link]="hero.imageLink" (newUrl)="newUrl($event)"></image-upload>
+    <image-upload [image]="hero.image" (newUrl)="newUrl($event)"></image-upload>
 
     <br>
-    <button type="button" (click)="addHero()" class="btn btn-success">Enregistrer mon Héro</button>
+    <button type="button" (click)="addHero()" class="btn btn-success" *ngIf="!hero.$key">Enregistrer mon Héro</button>
+    <button type="button" (click)="updateHero()" class="btn btn-success" *ngIf="hero.$key">Mettre à jour</button>
 
 
   </form>

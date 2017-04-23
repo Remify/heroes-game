@@ -1,4 +1,5 @@
-import {Player} from "./player";
+import { Image } from './image';
+
 export class HeroClass {
   $key?: string;
   name: string;
@@ -8,7 +9,7 @@ export class HeroClass {
   movePoint: number;
   cost: number;
   hp: number;
-  imageLink :string;
+  image? : Image;
 
   constructor(totalPoint: number) {
     this.name = "";
@@ -18,7 +19,6 @@ export class HeroClass {
     this.movePoint = 0;
     this.cost = 0;
     this.hp = 0;
-    this.imageLink = "";
   }
 
   Attaque() :number{
