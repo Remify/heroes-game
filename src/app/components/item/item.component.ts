@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {Item} from "../../models/item";
 import {ItemService} from "../../services/item.service";
 
@@ -9,12 +9,19 @@ import {ItemService} from "../../services/item.service";
 })
 export class ItemComponent implements OnInit {
 
-  public item : Item;
+  @Output() closeItem = new EventEmitter();
+  @Input() item : Item;
   constructor(private itemService: ItemService) {
-    this.item = new Item({});
+    if(! this.item) {
+      this.item = new Item({});
+    }
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    console.log(this.item);
   }
 
   submit(){
@@ -37,4 +44,9 @@ export class ItemComponent implements OnInit {
     console.log('update');
     this.itemService.updateItem(this.item);
   }
+
+  close() {
+    this.closeItem.next(true)
+  }
+
 }

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="">
   <form (ngSubmit)="submit()">
 
     <input class="form-control" type="text" [(ngModel)]="item.name" name="name" required>
@@ -26,6 +26,7 @@
     </div>
     <button *ngIf="item.key" class="btn btn-success" (click)="submit()">Mettre à jour</button>
     <button *ngIf="! item.key" class="btn btn-success" (click)="submit()">Ajouter</button>
+    <button type="button" class="btn btn-default" (click)="close()">Fermer</button>
 
   </form>
 </div>

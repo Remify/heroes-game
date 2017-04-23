@@ -13,9 +13,11 @@ export class HeroComponent implements OnInit {
 
   @Input() hero : HeroClass;
   usedBy : string[] = [];
-
+  item = true;
   constructor(private router :Router, private route: ActivatedRoute, private heroService :HeroClassService, private playerService :PlayerService) {
-
+    this.heroService.getHero('-KiQiXJT3rG9rFWTPiWL').subscribe(
+      hero => this.hero = hero
+    );
 
   }
 
@@ -47,6 +49,10 @@ export class HeroComponent implements OnInit {
   editHero(hero :HeroClass) {
     this.router.navigate(['edit/' + this.hero.$key])
     console.log('redirect to edit', hero);
+  }
+
+  addItem() {
+    this.item = true;
   }
 
 

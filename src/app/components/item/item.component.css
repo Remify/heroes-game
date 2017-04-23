@@ -5,3 +5,7 @@
 .property-line {
   margin: 5px 0;
 }
+
+input {
+  max-width: 400px;
+}

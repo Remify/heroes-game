@@ -12,6 +12,7 @@ export const routes: Routes = [
   { path: 'login',  component: LoginComponent },
   { path: 'lobby',  component: LobbyComponent },
   { path: 'heroes',  component: HeroesComponent },
+  { path: 'hero',  component: HeroComponent },
   { path: 'items',  component: ItemsComponent },
   { path: 'preparation',  component: HeroClassCreatorComponent },
   { path: 'edit/:id',  component: HeroClassCreatorComponent },
