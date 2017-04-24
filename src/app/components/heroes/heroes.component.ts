@@ -57,7 +57,7 @@ export class HeroesComponent implements OnInit {
 
   // Ajoute un héro à la liste des héro du joueur courant
   addHeroToCurrentPlayer() {
-    this.playerService.addHeroKeyToPlayer(this.selectedHero.$key);
+    this.playerService.addHeroKeyToPlayer(this.selectedHero.key);
     console.log(this.selectedHero);
   }
 

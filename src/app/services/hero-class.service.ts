@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HeroClass} from "../models/hero-class";
-import {AngularFire, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2';
+import { Injectable } from '@angular/core';
+import { HeroClass } from "../models/hero-class";
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
 
 @Injectable()
 export class HeroClassService {
@@ -14,18 +14,18 @@ export class HeroClassService {
   createHero(hero: HeroClass): firebase.Promise<any> {
     console.log('hero in CreatHero', hero);
     const promise = this.heroes.push(hero);
-    return promise
+    return promise;
   }
 
   removeHero(hero: HeroClass): firebase.Promise<any> {
-    return this.heroes.remove(hero.$key);
+    return this.heroes.remove(hero.key);
   }
 
   updateHero(hero: HeroClass): firebase.Promise<any> {
-    return this.heroes.update(hero.$key, hero);
+    return this.heroes.update(hero.key, hero);
   }
 
-  getHero(key :string) :FirebaseObjectObservable<any> {
+  getHero(key: string): FirebaseObjectObservable<any> {
     console.log('getHero');
     return this.firebase.database.object('heroes/' + key);
   }

@@ -21,19 +21,24 @@ export class HeroComponent implements OnInit {
   };
 
   item = false;
-  constructor(private router: Router, private route: ActivatedRoute, private heroService: HeroClassService, private playerService: PlayerService) {
-    this.heroService.getHero('-KiQiXJT3rG9rFWTPiWL').subscribe(
-      hero => {
-        this.hero = new HeroClass(hero)
-        this.heroStats = this.hero.calcStats()
-      }
-    );
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private heroService: HeroClassService,
+    private playerService: PlayerService) {
+    // this.heroService.getHero('-KiQiXJT3rG9rFWTPiWL').subscribe(
+    //   hero => {
+    //     this.hero = new HeroClass(hero);
+    //     this.heroStats = this.hero.calcStats();
+    //   }
+    // );
 
   }
 
   ngOnInit() {
 
   }
+
   ngOnChanges(changes: SimpleChanges) {
     this.usedBy = [];
 
@@ -45,20 +50,22 @@ export class HeroComponent implements OnInit {
         players.forEach(
           player => {
             if (player.heroesKeys) {
-              console.log(this.hero.$key);
-              if (player.heroesKeys.indexOf(this.hero.$key) >= 0 && this.usedBy.indexOf(this.hero.$key) < 0) {
-                this.usedBy.push(player.pseudo)
+
+              if (player.heroesKeys.indexOf(this.hero.key) >= 0 && this.usedBy.indexOf(this.hero.key) < 0) {
+                this.usedBy.push(player.pseudo);
               }
 
             }
-          })
+          });
       }
     );
+
+
+
   }
 
   editHero(hero: HeroClass) {
-    this.router.navigate(['edit/' + this.hero.$key])
-    console.log('redirect to edit', hero);
+    this.router.navigate(['edit/' + this.hero.key]);
   }
 
   addItem() {
@@ -67,11 +74,18 @@ export class HeroComponent implements OnInit {
 
   closeItems() {
     this.item = false;
+    this.update();
   }
 
   addItemToHero(item) {
     this.hero.addItem(item);
-    this.heroStats = this.hero.calcStats()
+    this.heroStats = this.hero.calcStats();
+    this.update();
+  }
+
+  update() {
+    console.log(this.hero)
+    this.heroService.updateHero(this.hero);
   }
 
 

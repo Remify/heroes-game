@@ -24,6 +24,9 @@
                     </div>
                 </div>
             </div>
+            <div class="items">
+                <span *ngFor="let item of hero.items" class="label label-info">{{ item?.name }}</span>
+            </div>
             <div class="panel-footer">
                 Utilisé par :
                 <span *ngFor="let name of usedBy" class="label label-info">{{ name }}</span>

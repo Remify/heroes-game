@@ -41,7 +41,7 @@ export class HeroClassCreatorComponent implements OnInit {
 
 
     // 10 nombre de points pour le héro
-    this.hero = new HeroClass(40);
+    this.hero = new HeroClass({});
 
     // Init de l'image
     this.hero.image = {
@@ -63,7 +63,10 @@ export class HeroClassCreatorComponent implements OnInit {
         if(params['id']) {
           let key = params['id'];
           this.heroClassService.getHero(key).subscribe(
-            hero => this.hero = hero
+            hero => {
+              this.hero = new HeroClass(hero)
+              console.log(this.hero);
+            }
           );
         }
       });

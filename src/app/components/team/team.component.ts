@@ -39,7 +39,7 @@ export class TeamComponent implements OnInit {
               this.heroService.getHero(key).take(1).subscribe(hero => { // Take(1) désabonne après le premier set de donnée
 
                 // N'ajoute pas le héro si il existe déjà dans la liste
-                if (!this.heroes.find(hero => hero.$key === key)) {
+                if (!this.heroes.find(hero => hero.key === key)) {
                   this.message = "";
                   this.heroes.push(hero)
                 }
@@ -57,7 +57,7 @@ export class TeamComponent implements OnInit {
   unsetHero(event: any) {
     let hero = event.dragData;
     if(this.heroes.length > 1 ) {
-      this.playerService.unsetHeroToCurrentPlayer(hero.$key);
+      this.playerService.unsetHeroToCurrentPlayer(hero.key);
       this.message = "";
     } else {
       this.message = "Il te faut au moins 1 Héro dans ton équipe !";

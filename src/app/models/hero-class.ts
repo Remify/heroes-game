@@ -2,7 +2,7 @@ import { Image } from './image';
 import { Item } from './item';
 
 export class HeroClass {
-  $key?: string;
+  key?: string;
   name: string;
   totalPoint: number;
   attaquePoint: number;
@@ -14,6 +14,7 @@ export class HeroClass {
   items: Item[];
 
   constructor(json :any) {
+    this.key = json.$key || null;
     this.name = json.name || "";
     this.totalPoint = json.totalPoint || 40;
     this.attaquePoint = json.attaquePoint ||  0;
