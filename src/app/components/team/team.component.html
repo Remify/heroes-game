@@ -7,18 +7,20 @@
 
       <span class="flex-center">
 
-       <span class="glyphicon glyphicon-flash">{{ hero.attaquePoint }} </span>
-       <span class="glyphicon glyphicon-remove-sign">{{ hero.defensePoint }}</span>
-       <span class="glyphicon glyphicon-move">{{ hero.movePoint }}</span>
-       <span class="glyphicon glyphicon-heart">{{ hero.hp }} </span>
+       <span class="glyphicon glyphicon-flash">{{ getAttaque(hero) }} </span>
+       <span class="glyphicon glyphicon-remove-sign">{{ getDefense(hero) }}</span>
+       <span class="glyphicon glyphicon-move">{{ getMove(hero) }}</span>
+       <span class="glyphicon glyphicon-heart">{{ getHp(hero) }} </span>
 
       </span>
     </li>
   </ul>
 </div>
+
 <div class="panel">
   {{ message }}
 </div>
+
 <div class="panel panel-default drop-zone padding">
   <div class="panel-body" dnd-droppable [dropZones]="['delete-dropZone']" (onDropSuccess)="unsetHero($event)">
     <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>

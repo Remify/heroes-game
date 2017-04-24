@@ -27,13 +27,7 @@ export class PlayerService {
       {
         player.key = item.key;
         this.currentPlayer = this.firebase.database.object('players/' + player.key);
-
-
-        this.currentPlayer.subscribe(
-          value => console.log(value),
-          err => console.log(err)
-        );
-
+        console.log('getAuth', item);
       }
     );
 

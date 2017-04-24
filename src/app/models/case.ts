@@ -19,7 +19,7 @@ export class Case {
 
   isHeroIn(id: string): boolean {
     if (this.unit) {
-      return this.unit.$key == id
+      return this.unit.key == id
     } else {
       return false
     }

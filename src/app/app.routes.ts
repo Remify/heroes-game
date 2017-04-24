@@ -6,15 +6,13 @@ import {LobbyComponent} from "./components/lobby/lobby.component";
 import {HeroesComponent} from "./components/heroes/heroes.component";
 import {HeroComponent} from "./components/hero/hero.component";
 import {ItemsComponent} from "./components/items/items.component";
+import {AuthGuard} from "./auth.guard";
 
 export const routes: Routes = [
   { path: 'board',  component: BoardComponent },
   { path: 'login',  component: LoginComponent },
-  { path: 'lobby',  component: LobbyComponent },
-  { path: 'heroes',  component: HeroesComponent },
-  { path: 'hero',  component: HeroComponent },
-  { path: 'items',  component: ItemsComponent },
-  { path: 'preparation',  component: HeroClassCreatorComponent },
-  { path: 'edit/:id',  component: HeroClassCreatorComponent },
+  { path: 'heroes',  component: HeroesComponent, canActivate: [AuthGuard]},
+  { path: 'preparation',  component: HeroClassCreatorComponent, canActivate: [AuthGuard]},
+  { path: 'edit/:id',  component: HeroClassCreatorComponent, canActivate: [AuthGuard]},
   { path: '**', component: LoginComponent }
 ];

@@ -53,7 +53,6 @@ export class HeroClass {
       move: this.movePoint,
       hp: this.hp
     }
-    console.log(stats);
 
     this.items.forEach(item => {
       stats['attaque'] += item['attaque'];
@@ -61,8 +60,6 @@ export class HeroClass {
       stats['move'] += item['move'];
       stats['hp'] += item['hp'];
     })
-
-    console.log(stats);
 
     return stats;
   }

@@ -31,6 +31,8 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemComponent } from './components/item/item.component';
 import {ItemService} from "./services/item.service";
+import { MenuComponent } from './components/menu/menu.component';
+import {AuthGuard} from "./auth.guard";
 
 // Router
 RouterModule.forRoot([
@@ -60,6 +62,7 @@ RouterModule.forRoot([
     HeroComponent,
     ItemsComponent,
     ItemComponent,
+    MenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,7 @@ RouterModule.forRoot([
     AlertModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [HeroClassService, PlayerService, ItemService ],
+  providers: [HeroClassService, PlayerService, ItemService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

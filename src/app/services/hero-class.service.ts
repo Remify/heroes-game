@@ -12,7 +12,6 @@ export class HeroClassService {
   }
 
   createHero(hero: HeroClass): firebase.Promise<any> {
-    console.log('hero in CreatHero', hero);
     const promise = this.heroes.push(hero);
     return promise;
   }
@@ -26,7 +25,6 @@ export class HeroClassService {
   }
 
   getHero(key: string): FirebaseObjectObservable<any> {
-    console.log('getHero');
     return this.firebase.database.object('heroes/' + key);
   }
 }

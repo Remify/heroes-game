@@ -21,7 +21,7 @@ export class BoardController {
     this.heroesService.heroes.subscribe(
       heroesList => this.heroes = heroesList.map(function (hero) {
         let heroObj = Object.assign(new HeroClass(10), hero);
-        heroObj.$key = hero.$key
+        heroObj.key = hero.key
 
         return heroObj
       })
@@ -50,15 +50,12 @@ export class BoardController {
 
   fight(attackHero: HeroClass, defenseHero :HeroClass) {
 
-    console.log('fight', this.heroes)
     const heroesList = this.heroes ;
 
     heroesList.map(function (hero) {
-      if(hero.$key == defenseHero.$key) {
+      if(hero.key == defenseHero.key) {
         // TODO attaque bug
-        console.log(hero)
         hero.Defend(attackHero.Attaque())
-        console.log(hero)
       }
     })
 

@@ -1,3 +1,4 @@
+<app-menu></app-menu>
 <div class="col-md-5">
   <h2>Constituez votre équipe</h2>
   <table [mfData]="heroes | dataFilter : search" #mf="mfDataTable" [mfRowsOnPage]="20"
@@ -22,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let hero of mf.data; let ndx = index" [hidden]="isInHide(hero.$key)" [class.active]="hero === selectedHero"
+    <tr *ngFor="let hero of mf.data; let ndx = index" [hidden]="isInHide(hero.key)" [class.active]="hero === selectedHero"
         (click)="selectHeroClass(hero)">
       <td>{{hero.name }}</td>
       <td>{{hero.attaquePoint}}</td>

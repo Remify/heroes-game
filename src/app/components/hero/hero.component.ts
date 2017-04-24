@@ -3,16 +3,26 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { HeroClassService } from "../../services/hero-class.service";
 import { HeroClass } from "../../models/hero-class";
 import { PlayerService } from "../../services/player.service";
+import {Item} from "../../models/item";
 
 @Component({
   selector: 'hero',
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
+/**
+ * Affiche els caractéristiques d'un héro
+ *
+ * Permet de gérer les items du héro
+ */
 export class HeroComponent implements OnInit {
 
   @Input() hero: HeroClass;
+
+  // Héro utilisé par les joueurs,; appel playerService
   usedBy: string[] = [];
+
+  // Gère les statistiques calculés du héro
   heroStats = {
     attaque: 0,
     defense: 0,
@@ -26,13 +36,10 @@ export class HeroComponent implements OnInit {
     private route: ActivatedRoute,
     private heroService: HeroClassService,
     private playerService: PlayerService) {
-    // this.heroService.getHero('-KiQiXJT3rG9rFWTPiWL').subscribe(
-    //   hero => {
-    //     this.hero = new HeroClass(hero);
-    //     this.heroStats = this.hero.calcStats();
-    //   }
-    // );
 
+    if(this.hero) {
+      this.heroStats = this.hero.calcStats();
+    }
   }
 
   ngOnInit() {
@@ -42,6 +49,7 @@ export class HeroComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.usedBy = [];
 
+    this.heroStats = this.hero.calcStats();
 
     this.playerService.players.subscribe(
       players => {
@@ -78,14 +86,22 @@ export class HeroComponent implements OnInit {
   }
 
   addItemToHero(item) {
-    this.hero.addItem(item);
-    this.heroStats = this.hero.calcStats();
-    this.update();
+
+    if(this.hero.items.indexOf(item) < 0) {
+      this.hero.addItem(item);
+      this.heroStats = this.hero.calcStats();
+      this.update();
+    }
+
   }
 
   update() {
-    console.log(this.hero)
     this.heroService.updateHero(this.hero);
+  }
+
+  unsetItem(item :Item) {
+    this.hero.items = this.hero.items.filter(i => i != item);
+    this.update();
   }
 
 

@@ -38,7 +38,7 @@ export class Board {
 
   removeHero(hero: HeroClass) {
     let caseWithHero = this.getAllCase().find(function (aCase) {
-      return aCase.isHeroIn(hero.$key)
+      return aCase.isHeroIn(hero.key)
     });
 
     caseWithHero.unsetHero()

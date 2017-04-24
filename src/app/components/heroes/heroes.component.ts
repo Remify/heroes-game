@@ -25,13 +25,13 @@ export class HeroesComponent implements OnInit {
 
     // Abonnement à la liste des héros
     this.heroClassService.heroes.subscribe(
-      (list) => this.heroes = list
+      (list) => this.heroes = list.map(hero => new HeroClass(hero))
     );
 
     // Abonnement à la liste des héro du joueurs courant
     this.playerService.currentPlayer.subscribe(
       player => {
-        this.toHide = player.heroesKeys;
+        this.toHide = player.heroesKeys || [];
       }
     )
 

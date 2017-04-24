@@ -6,6 +6,7 @@ export class Player {
   isOnline: boolean
   heroesKeys: string[];
   heroes: HeroClass[];
+  authKey: string = "";
 
   constructor(pseudo: string) {
     this.pseudo = pseudo;

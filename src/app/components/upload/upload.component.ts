@@ -57,11 +57,9 @@ export class UploadComponent {
   }
 
   ngOnInit() {
-      console.log(this.image)
   }
 
   ngOnChanges() {
-    console.log("new values for folder");
     let storage = firebase.storage();
   }
 
@@ -75,7 +73,6 @@ export class UploadComponent {
     let success = false;
 
     for (let selectedFile of [(<HTMLInputElement>document.getElementById('file')).files[0]]) {
-      console.log(selectedFile);
       // Copie des services de this - Sinon ne marche pas
       let router = this.router;
       let af = this.af;
@@ -112,9 +109,7 @@ export class UploadComponent {
     let storagePath = image.path;
     let referencePath = `${this.folder}` + image.key;
 
-    // Do these as two separate steps so you can still try delete ref if file no longer exists
-
-    // Delete from Storage
+    // Delete sur Storage
     firebase.storage().ref().child(storagePath).delete()
       .then(
         () => {
@@ -122,7 +117,7 @@ export class UploadComponent {
         (error) => console.error("Error deleting stored file", storagePath)
       );
 
-    // Delete references
+    // Delete la reference
     this.af.database.object(referencePath).remove()
   }
 }

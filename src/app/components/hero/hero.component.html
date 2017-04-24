@@ -25,7 +25,32 @@
                 </div>
             </div>
             <div class="items">
-                <span *ngFor="let item of hero.items" class="label label-info">{{ item?.name }}</span>
+              <ul class="list-group">
+
+                <li *ngFor="let item of hero.items; let i = index" class="list-group-item">
+
+                  <div class="item">
+                    <div style="width:100%">
+                      {{item.name}}
+                    </div>
+                    <div style="width:100%">
+
+                      <span class="flex-center">
+
+                      <span class="glyphicon glyphicon-flash">{{ item.attaque}} </span>
+                      <span class="glyphicon glyphicon-remove-sign">{{ item.defense }}</span>
+                      <span class="glyphicon glyphicon-move">{{ item.move }}</span>
+                      <span class="glyphicon glyphicon-heart">{{ item.hp }} </span>
+
+                      </span>
+                    </div>
+                  </div>
+                  <div>
+                    <button type="button" class="btn" (click)="unsetItem(item)">
+                      <span class="glyphicon glyphicon-minus"></span></button>
+                  </div>
+                </li>
+              </ul>
             </div>
             <div class="panel-footer">
                 Utilisé par :
