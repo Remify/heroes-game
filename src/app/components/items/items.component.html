@@ -1,23 +1,37 @@
-
-  <div class="items" dnd-sortable-container [sortableData]="items">
+<div class="items" dnd-sortable-container [sortableData]="items">
     <ul class="list-group">
 
-      <li *ngFor="let item of items; let i = index" (click)="select(item)" class="list-group-item" dnd-sortable [sortableIndex]="i"
-          [dragData]="hero">
-        {{item.name}}
+        <li *ngFor="let item of items; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i" [dragData]="hero">
 
-        <span class="flex-center">
+            <div (click)="select(item)" class="item-click">
+                <div style="width:100%">
+                    {{item.name}}
+                </div>
+                <div style="width:100%">
 
-         <span class="glyphicon glyphicon-flash">{{ item.attaque}} </span>
-         <span class="glyphicon glyphicon-remove-sign">{{ item.defense }}</span>
-         <span class="glyphicon glyphicon-move">{{ item.move }}</span>
-         <span class="glyphicon glyphicon-heart">{{ item.hp }} </span>
+                    <span class="flex-center">
 
-        </span>
-      </li>
+                    <span class="glyphicon glyphicon-flash">{{ item.attaque}} </span>
+                    <span class="glyphicon glyphicon-remove-sign">{{ item.defense }}</span>
+                    <span class="glyphicon glyphicon-move">{{ item.move }}</span>
+                    <span class="glyphicon glyphicon-heart">{{ item.hp }} </span>
+
+                    </span>
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn" (click)="addItemToHero(item)">
+                <span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </li>
     </ul>
-  </div>
-  <div class="">
+</div>
+<div class="buttons">
     <app-item [item]="selected" (closeItem)="closeItem()" *ngIf="selected"></app-item>
-    <button class="btn btn-default" (click)="createItem()" [hidden]="selected">Créer un item</button>
-  </div>
+    <div [hidden]="selected">
+        <button class="btn btn-default" (click)="createItem()">Créer un item</button>
+    </div>
+    <div [hidden]="selected">
+        <button class="btn btn-default" type="button" (click)="closeItems()">Fermer</button>
+    </div>
+</div>

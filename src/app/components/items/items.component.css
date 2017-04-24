@@ -1,7 +1,39 @@
 .items {
-  max-width: 400px;
+    max-width: 400px;
 }
 
 app-item {
-  max-width: 400px;
+    max-width: 400px;
+}
+
+li {
+    display: flex;
+    align-content: space-between;
+}
+
+li .item-click {
+    display: flex;
+    /* position: relative; */
+    flex-direction: row;
+    align-content: space-between;
+    width: 100%;
+}
+
+li>span {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-center .glyphicon {
+    margin: 0 3px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+}
+
+li .btn {
+    font-size: 0.4em;
 }

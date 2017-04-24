@@ -31,7 +31,6 @@ import { HeroComponent } from './components/hero/hero.component';
 import { ItemsComponent } from './components/items/items.component';
 import { ItemComponent } from './components/item/item.component';
 import {ItemService} from "./services/item.service";
-import {Ng2SliderComponent} from "ng2-slider-component/ng2-slider.component";
 
 // Router
 RouterModule.forRoot([

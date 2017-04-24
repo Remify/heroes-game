@@ -1,3 +1,7 @@
 image-upload img {
-  width:150px;
+    width: 150px;
+}
+
+:host {
+    position: relative!important;
 }

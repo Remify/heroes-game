@@ -1,33 +1,37 @@
 img {
-  width:100px;
+    width: 100px;
 }
 
 #hero-panel {
-  max-width: 400px;
+    max-width: 400px;
 }
 
 .panel-body .row {
-  display: flex;
-  justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
 }
 
 .col {
-  width: 100%;
+    width: 100%;
 }
 
 .stats {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
-.stats > div {
-  margin: 5px 10px;
+.stats>div {
+    margin: 5px 10px;
 }
 
 .label {
-  margin: 3px;
+    margin: 3px;
 }
 
 .edit-btn {
-  float: right;
+    float: right;
+}
+
+.btn-success {
+    margin-right: 15px;
 }

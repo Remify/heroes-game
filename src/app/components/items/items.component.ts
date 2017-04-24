@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import {ItemService} from "../../services/item.service";
 import {Item} from "../../models/item";
 
@@ -10,7 +10,9 @@ import {Item} from "../../models/item";
 export class ItemsComponent implements OnInit {
 
   items :Item[] = [];
-  selected :Item = null;
+  @Output() close = new EventEmitter();
+  @Output() addItem = new EventEmitter();
+  selected :Item;
   constructor(private itemService :ItemService) {
     this.itemService.items.subscribe(
       items => this.items = items
@@ -29,6 +31,15 @@ export class ItemsComponent implements OnInit {
   }
   createItem() {
     this.selected = new Item({});
+  }
+
+  addItemToHero(item :Item) {
+    this.selected = null;
+    this.addItem.next(item);
+  }
+
+  closeItems() {
+      this.close.next(true);
   }
 
 

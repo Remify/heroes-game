@@ -1,32 +1,34 @@
 <div class="">
-  <form (ngSubmit)="submit()">
+    <form (ngSubmit)="submit()">
 
-    <input class="form-control" type="text" [(ngModel)]="item.name" name="name" required>
-    <div class="col stats">
-      <div class="property-line">
-        <button type="button" class="btn" (click)="item.minus('attaque')"><span class="glyphicon glyphicon-minus"></span></button>
-        <button type="button" class="btn property"><span class="glyphicon glyphicon-flash"></span> {{ item.attaque }}</button>
-        <button type="button" class="btn"  (click)="item.plus('attaque')"><span class="glyphicon glyphicon-plus"></span></button>
-      </div>
-      <div  class="property-line">
-        <button type="button" class="btn" (click)="item.minus('defense')"><span class="glyphicon glyphicon-minus"></span></button>
-        <button type="button" class="btn property"><span class="glyphicon glyphicon-remove-sign"></span> {{ item.defense }}</button>
-        <button type="button" class="btn"  (click)="item.plus('defense')"><span class="glyphicon glyphicon-plus"></span></button>
-      </div>
-      <div class="property-line">
-        <button  type="button" class="btn" (click)="item.minus('move')"><span class="glyphicon glyphicon-minus"></span></button>
-        <button  type="button" class="btn property"><span class="glyphicon glyphicon-move"></span> {{ item.move }}</button>
-        <button  type="button" class="btn"  (click)="item.plus('move')"><span class="glyphicon glyphicon-plus"></span></button>
-      </div>
-      <div class="property-line">
-        <button  type="button" class="btn" (click)="item.minus('hp')"><span class="glyphicon glyphicon-minus"></span></button>
-        <button  type="button" class="btn property"><span class="glyphicon glyphicon-heart"></span> {{ item.hp }}</button>
-        <button  type="button" class="btn"  (click)="item.plus('hp')"><span class="glyphicon glyphicon-plus"></span></button>
-      </div>
-    </div>
-    <button *ngIf="item.key" class="btn btn-success" (click)="submit()">Mettre à jour</button>
-    <button *ngIf="! item.key" class="btn btn-success" (click)="submit()">Ajouter</button>
-    <button type="button" class="btn btn-default" (click)="close()">Fermer</button>
+        <input class="form-control" type="text" [(ngModel)]="item.name" name="name" required>
+        <div class="col stats">
+            <div class="property-line">
+                <button type="button" class="btn" (click)="item.minus('attaque')"><span class="glyphicon glyphicon-minus"></span></button>
+                <button type="button" class="btn property"><span class="glyphicon glyphicon-flash"></span> {{ item.attaque }}</button>
+                <button type="button" class="btn" (click)="item.plus('attaque')"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+            <div class="property-line">
+                <button type="button" class="btn" (click)="item.minus('defense')"><span class="glyphicon glyphicon-minus"></span></button>
+                <button type="button" class="btn property"><span class="glyphicon glyphicon-remove-sign"></span> {{ item.defense }}</button>
+                <button type="button" class="btn" (click)="item.plus('defense')"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+            <div class="property-line">
+                <button type="button" class="btn" (click)="item.minus('move')"><span class="glyphicon glyphicon-minus"></span></button>
+                <button type="button" class="btn property"><span class="glyphicon glyphicon-move"></span> {{ item.move }}</button>
+                <button type="button" class="btn" (click)="item.plus('move')"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+            <div class="property-line">
+                <button type="button" class="btn" (click)="item.minus('hp')"><span class="glyphicon glyphicon-minus"></span></button>
+                <button type="button" class="btn property"><span class="glyphicon glyphicon-heart"></span> {{ item.hp }}</button>
+                <button type="button" class="btn" (click)="item.plus('hp')"><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+        </div>
+        <button style="float:left;margin-right:20px;" *ngIf="item.key" class="btn btn-success" (click)="submit()">Mettre à jour</button>
+        <button style="float:left;margin-right:20px;" *ngIf="! item.key" class="btn btn-success" (click)="submit()">Ajouter</button>
+        <div style="float:left;">
+            <button type="button" class="btn btn-default" (click)="close()">Fermer</button>
+        </div>
 
-  </form>
+    </form>
 </div>
