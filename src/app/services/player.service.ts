@@ -9,7 +9,7 @@ import {Player} from "../models/player";
 export class PlayerService {
   currentPlayer : FirebaseObjectObservable<Player>;
   players: FirebaseListObservable<any>;
-
+  isConnected = false;
   constructor(private firebase: AngularFire) {
     this.players = firebase.database.list('/players');
     this.currentPlayer = new FirebaseObjectObservable();
@@ -27,7 +27,7 @@ export class PlayerService {
       {
         player.key = item.key;
         this.currentPlayer = this.firebase.database.object('players/' + player.key);
-        console.log('getAuth', item);
+        this.isConnected = true;
       }
     );
 

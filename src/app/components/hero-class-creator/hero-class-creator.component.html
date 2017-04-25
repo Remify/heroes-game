@@ -1,105 +1,105 @@
 <app-menu></app-menu>
 <div class="col-md-6">
 
-  <h2>Créé ton Héro !</h2>
-  <p>Afin d'affronter des adversaires en ligne, il va falloir créer ton héro !</p>
+    <h2>Créé ton Héro !</h2>
+    <p>Afin d'affronter des adversaires en ligne, il va falloir créer ton héro !</p>
 
-  <form #form="ngForm" (ngSubmit)="addHero()">
-    <label for="inputName">Nom du héro :</label><br/>
-    <input type="text" [(ngModel)]="hero.name" required id="inputName" name="name" class="form-control" pattern="^[A-Z\d][^\n]+" #heroname="ngModel">
-    <small [hidden]="heroname.valid" class="text-danger">
+    <form #form="ngForm" (ngSubmit)="addHero()">
+        <label for="inputName">Nom du héro :</label><br/>
+        <input type="text" [(ngModel)]="hero.name" required id="inputName" name="name" class="form-control" pattern="^[A-Z\d][^\n]+" #heroname="ngModel">
+        <small [hidden]="heroname.valid" class="text-danger">
       Le nom d'un Héro commence toujours par une majuscule ...
     </small>
-    <br/><br/>
+        <br/><br/>
 
-    <h3><span class="glyphicon glyphicon-tasks"></span>&nbsp;Attributs du Héro</h3>
-    <label> Point total : </label>
-    <button type="button" class="btn" [class.btn-danger]="this.hero.totalPoint == 0">{{ hero.totalPoint }}</button>
-    <br/>
+        <h3><span class="glyphicon glyphicon-tasks"></span>&nbsp;Attributs du Héro</h3>
+        <label> Point total : </label>
+        <button type="button" class="btn" [class.btn-danger]="this.hero.totalPoint == 0">{{ hero.totalPoint }}</button>
+        <br/>
 
-    <label>Point d'attaque :</label><br/>
-    <div class="btn-group btn-group-justified" role="group">
-      <div class="btn-group" role="group">
-        <button type="button" (click)="minusAttaque()" class="btn btn-default"><span
+        <label>Point d'attaque :</label><br/>
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+                <button type="button" (click)="minusAttaque()" class="btn btn-default"><span
           class="glyphicon glyphicon-minus"></span></button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default">
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">
           <span class="glyphicon glyphicon-flash"></span>{{ hero.attaquePoint }}
         </button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" (click)="plusAttaque()" class="btn btn-default"><span
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" (click)="plusAttaque()" class="btn btn-default"><span
           class="glyphicon glyphicon-plus"></span></button>
-      </div>
-    </div>
-    <br>
+            </div>
+        </div>
+        <br>
 
-    <label>Point de défense :</label><br/>
+        <label>Point de défense :</label><br/>
 
-    <div class="btn-group btn-group-justified" role="group">
-      <div class="btn-group" role="group">
-        <button type="button" (click)="minusDefense()" class="btn btn-default"><span
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+                <button type="button" (click)="minusDefense()" class="btn btn-default"><span
           class="glyphicon glyphicon-minus"></span></button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default">
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">
           <span class="glyphicon glyphicon-remove-sign"></span>{{ hero.defensePoint }}
         </button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" (click)="plusDefense()" class="btn btn-default">
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" (click)="plusDefense()" class="btn btn-default">
           <span class="glyphicon glyphicon-plus"></span></button>
-      </div>
-    </div>
-    <br>
+            </div>
+        </div>
+        <br>
 
 
-    <label>Mouvement : </label><br>
-    <div class="btn-group btn-group-justified" role="group">
-      <div class="btn-group" role="group">
-        <button type="button" (click)="minusMove()" class="btn btn-default"><span
+        <label>Mouvement : </label><br>
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+                <button type="button" (click)="minusMove()" class="btn btn-default"><span
           class="glyphicon glyphicon-minus"></span></button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-move"></span>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-move"></span>
           {{ hero.movePoint }}
         </button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" (click)="plusMove()" class="btn btn-default"><span
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" (click)="plusMove()" class="btn btn-default"><span
           class="glyphicon glyphicon-plus"></span></button>
-      </div>
-    </div>
-    <br>
+            </div>
+        </div>
+        <br>
 
 
 
-    <label>Point de vie : </label><br>
-    <div class="btn-group btn-group-justified" role="group">
-      <div class="btn-group" role="group">
-        <button type="button" (click)="minusHp()" class="btn btn-default"><span
+        <label>Point de vie : </label><br>
+        <div class="btn-group btn-group-justified" role="group">
+            <div class="btn-group" role="group">
+                <button type="button" (click)="minusHp()" class="btn btn-default"><span
           class="glyphicon glyphicon-minus"></span></button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span>
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-heart"></span>
           {{ hero.hp }}
         </button>
-      </div>
-      <div class="btn-group" role="group">
-        <button type="button" (click)="plusHp()" class="btn btn-default"><span
+            </div>
+            <div class="btn-group" role="group">
+                <button type="button" (click)="plusHp()" class="btn btn-default"><span
           class="glyphicon glyphicon-plus"></span></button>
-      </div>
-    </div>
+            </div>
+        </div>
 
-    <image-upload [image]="hero.image" (newUrl)="newUrl($event)"></image-upload>
+        <image-upload [image]="hero.image" (newUrl)="newUrl($event)"></image-upload>
 
-    <br>
-    <button type="submit" class="btn btn-success" *ngIf="!hero.$key">Enregistrer mon Héro</button>
-    <button type="submit" class="btn btn-success" *ngIf="hero.$key">Mettre à jour</button>
+        <br>
+        <button type="submit" class="btn btn-success" *ngIf="!hero.key">Enregistrer mon Héro</button>
+        <button type="submit" class="btn btn-success" *ngIf="hero.key">Mettre à jour</button>
 
 
-  </form>
+    </form>
 
 
 

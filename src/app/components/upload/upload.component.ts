@@ -1,9 +1,8 @@
-import {Component, Input, Output, EventEmitter} from '@angular/core';
-import {Router} from '@angular/router';
-import {AngularFire} from 'angularfire2';
+import { Component, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
+import { Router } from '@angular/router';
+import { AngularFire } from 'angularfire2';
 import * as firebase from 'firebase';
-import { Image } from '../../models/image'
-
+import { Image } from '../../models/image';
 /**
  *  Composant pour uploadé une Image
  *  Le module AngularFire2 ne gère pas encore le storage. On va donc faire à la main
@@ -20,7 +19,7 @@ import { Image } from '../../models/image'
     <div class="col-md-6">
     
       <div [hidden]="image.downloadURL">
-          <input  class="form-control" id="file" name="file" type="file" required>
+          <input  class="form-control" id="file" name="file" type="file" (change)="upload()" required>
           <button type="button" class="btn btn-default" (click)="upload()">Upload</button>
       </div>
       
@@ -37,7 +36,7 @@ import { Image } from '../../models/image'
       </div>
       <div *ngIf="image.downloadURL">
        <img [src]="image.downloadURL">
-       <button type="button" class="btn btn-danger "(click)="remove">Supprimer</button>
+       <button type="button" class="btn btn-danger "(click)="remove()">Supprimer</button>
       </div>
     </div>
     
@@ -59,8 +58,10 @@ export class UploadComponent {
   ngOnInit() {
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChange) {
     let storage = firebase.storage();
+    console.log(changes);
+
   }
 
   /**
@@ -86,9 +87,9 @@ export class UploadComponent {
       // Upload de l'image
       iRef.put(selectedFile).then((snapshot) => {
 
-        let key = af.database.list(`/${folder}`).push({path: path, filename: selectedFile.name}).key;
+        let key = af.database.list(`/${folder}`).push({ path: path, filename: selectedFile.name }).key;
 
-        iRef.getDownloadURL().then( url => {
+        iRef.getDownloadURL().then(url => {
 
           this.image.downloadURL = url;
           this.newUrl.next({
@@ -96,7 +97,7 @@ export class UploadComponent {
             filename: selectedFile.name,
             downloadURL: url,
             key: key
-         });
+          });
           success = true;
         });
 
@@ -112,12 +113,22 @@ export class UploadComponent {
     // Delete sur Storage
     firebase.storage().ref().child(storagePath).delete()
       .then(
-        () => {
-        },
-        (error) => console.error("Error deleting stored file", storagePath)
+      () => {
+        this.image = {
+            path: '',
+            filename: '',
+            downloadURL: undefined,
+            key: undefined
+          };
+      },
+      (error) => console.error("Error deleting stored file", storagePath)
       );
 
     // Delete la reference
-    this.af.database.object(referencePath).remove()
+    this.af.database.object(referencePath).remove();
+  }
+
+  remove() {
+    this.delete(this.image);
   }
 }

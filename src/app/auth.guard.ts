@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import {PlayerService} from "./services/player.service";
-import {AngularFire, AngularFireAuth, FirebaseAuthState} from "angularfire2";
+import { PlayerService } from "./services/player.service";
+import { AngularFire, AngularFireAuth, FirebaseAuthState } from "angularfire2";
 
 
 @Injectable()
@@ -12,15 +12,15 @@ import {AngularFire, AngularFireAuth, FirebaseAuthState} from "angularfire2";
  *  L'AuthGuard est défini dans les routes
  */
 export class AuthGuard implements CanActivate {
-  constructor(private auth: AngularFireAuth, private router: Router) {}
+  constructor(private auth: PlayerService, private router: Router) {
+      console.log('current player undefined');
+  }
 
-  canActivate(): Observable<boolean> {
-    return this.auth
-      .take(1)
-      .map((authState: FirebaseAuthState) => !!authState)
-      .do(authenticated => {
-        console.log(authenticated);
-        if (!authenticated) this.router.navigate(['login']);
-      });
+  canActivate(): boolean {
+    if(! this.auth.isConnected) {
+      this.router.navigate(['login']);
+    }
+    
+    return this.auth.isConnected;
   }
 }
